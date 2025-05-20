@@ -2,6 +2,7 @@ package vcmsa.ci.flashcards
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
@@ -24,6 +25,7 @@ class second_screen : AppCompatActivity() {
     private var currentIndex = 0
     private var hasAnswered = false
     private var score = 0
+    private val userAnswers = mutableListOf<String>()
 
     private lateinit var textViewQuestion: TextView
     private lateinit var tvResponse: TextView
@@ -36,6 +38,13 @@ class second_screen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second_screen)
 
+        val btnReview = findViewById<Button>(R.id.btnReview)
+        btnReview.setOnClickListener {
+            val intent = Intent(this, third_screen::class.java)
+            intent.putStringArrayListExtra("userAnswers", ArrayList(userAnswers))
+            startActivity(intent)
+        }
+
         textViewQuestion = findViewById(R.id.textView2)
         tvResponse = findViewById(R.id.tvResponse)
         btnTrue = findViewById(R.id.btnTrue)
@@ -44,8 +53,8 @@ class second_screen : AppCompatActivity() {
 
         loadQuestion()
 
-        btnTrue.setOnClickListener { checkAnswer(true) }
-        btnFalse.setOnClickListener { checkAnswer(false) }
+        btnTrue.setOnClickListener { recordAnswer(true) }
+        btnFalse.setOnClickListener { recordAnswer(false) }
 
         btnNext.setOnClickListener {
             if (!hasAnswered) {
@@ -69,19 +78,23 @@ class second_screen : AppCompatActivity() {
         hasAnswered = false
     }
 
-    private fun checkAnswer(userAnswer: Boolean) {
+    private fun recordAnswer(userAnswer: Boolean) {
         if (hasAnswered) return
 
-        val correctAnswer = questions[currentIndex].answer
+        val question = questions[currentIndex]
+        val correctAnswer = question.answer
 
-        if (userAnswer == correctAnswer) {
-            tvResponse.text = "Correct"
-            tvResponse.setTextColor(Color.GREEN)
+        val response = if (userAnswer == correctAnswer) {
             score++
+            "Correct"
         } else {
-            tvResponse.text = "Incorrect"
-            tvResponse.setTextColor(Color.RED)
+            "Incorrect"
         }
+
+        tvResponse.text = response
+        tvResponse.setTextColor(if (response == "Correct") Color.GREEN else Color.RED)
+
+        userAnswers.add("Q: ${question.text}\nYour Answer: ${if (userAnswer) "True" else "False"}\nResult: $response\n")
 
         hasAnswered = true
     }
@@ -92,9 +105,13 @@ class second_screen : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Quiz Finished")
             .setMessage("Your score is $score out of ${questions.size}.\n\n$feedback")
-            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+                val intent = Intent(this, third_screen::class.java)
+                intent.putStringArrayListExtra("userAnswers", ArrayList(userAnswers))
+                startActivity(intent)
+            }
             .setCancelable(false)
             .show()
-
     }
 }

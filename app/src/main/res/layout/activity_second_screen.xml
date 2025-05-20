@@ -13,7 +13,7 @@
         android:layout_height="239dp"
         android:text="TextView"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -28,6 +28,8 @@
         android:layout_marginStart="28dp"
         android:layout_marginBottom="212dp"
         android:text="True"
+        android:backgroundTint="#4CAF50"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -36,6 +38,8 @@
         android:layout_width="124dp"
         android:layout_height="44dp"
         android:text="False"
+        android:backgroundTint="#ff0000"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.785"
@@ -47,8 +51,9 @@
         android:id="@+id/btnNext"
         android:layout_width="154dp"
         android:layout_height="44dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:text="Next"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,4 +71,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="0.333" />
+
+    <Button
+        android:id="@+id/btnReview"
+        android:layout_width="291dp"
+        android:layout_height="61dp"
+        android:text="Review Answers"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvResponse"
+        app:layout_constraintVertical_bias="0.834" />
 </androidx.constraintlayout.widget.ConstraintLayout>
