@@ -34,7 +34,7 @@ class second_screen : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_second_screen)
 
         textViewQuestion = findViewById(R.id.textView2)
         tvResponse = findViewById(R.id.tvResponse)
@@ -87,11 +87,14 @@ class second_screen : AppCompatActivity() {
     }
 
     private fun showScoreDialog() {
+        val feedback = if (score >= 3) "Great job!" else "Keep practising!"
+
         AlertDialog.Builder(this)
             .setTitle("Quiz Finished")
-            .setMessage("Your score is $score out of ${questions.size}.")
+            .setMessage("Your score is $score out of ${questions.size}.\n\n$feedback")
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .setCancelable(false)
             .show()
+
     }
 }

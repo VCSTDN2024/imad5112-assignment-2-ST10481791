@@ -9,12 +9,12 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="305dp"
-        android:layout_height="71dp"
-        android:text="Welcome! to the flashcard quiz app which will quiz you with 5  questions, press the START button to begin. "
+        android:layout_width="323dp"
+        android:layout_height="213dp"
+        android:text="Welcome! To the flashcard quiz app which will quiz you with 5  questions, press the START button to begin. "
         android:textAlignment="center"
+        android:textSize="30dp"
         android:textStyle="bold"
-        android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
